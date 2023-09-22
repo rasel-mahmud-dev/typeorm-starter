@@ -1,0 +1,14 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "rasel",
+  "database": "type_orm",
+  "entities": ["Models/**/*.ts"],
+  "migrations": ["migrations/**/*.ts"],
+  "cli": {
+    "entitiesDir": "Model",
+    "migrationsDir": "migrations"
+  }
+}
