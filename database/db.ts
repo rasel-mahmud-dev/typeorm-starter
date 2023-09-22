@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm"
 import {User} from "../Models/User";
 import {Tweet} from "../Models/Tweet";
+import {Like} from "../Models/Like";
 
 const AppDataSource = new DataSource({
     type: "postgres",
@@ -9,7 +10,7 @@ const AppDataSource = new DataSource({
     username: "postgres",
     password: "rasel",
     database: "type_orm",
-    entities: [User, Tweet],
+    entities: [User, Tweet, Like],
     synchronize: true,
     logging: false,
 })

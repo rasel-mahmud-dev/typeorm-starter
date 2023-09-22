@@ -1,5 +1,6 @@
-import {Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm"
+import {Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm"
 import {User} from "./User";
+import {Like} from "./Like";
 
 @Entity("tweets")
 export class Tweet {
@@ -20,4 +21,7 @@ export class Tweet {
 
     @ManyToOne(() => User) // Many-to-One relationship with User
     author!: User;
+
+    @OneToMany(() => Like, like => like.tweet)
+    likes: Like[] | undefined
 }

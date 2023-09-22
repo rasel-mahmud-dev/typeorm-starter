@@ -1,0 +1,46 @@
+### GET All users
+GET http://localhost:2200/users
+Content-Type: application/json
+
+### Create a user
+POST http://localhost:2200/users
+Content-Type: application/json
+
+{
+  "firstName": "alex2",
+  "lastName": "mia",
+  "email": "alex2@gmail.com"
+}
+
+### GET All tweets
+GET http://localhost:2200/tweets
+Content-Type: application/json
+
+### Create a tweets
+POST http://localhost:2200/tweets
+Content-Type: application/json
+
+{
+  "title": "Rust New Things",
+  "content": "text content",
+  "authorId": "3",
+  "cover": "http://photo.jpg"
+}
+
+
+### GET a tweet
+GET http://localhost:2200/tweets/1
+Content-Type: application/json
+
+
+### Create a tweet like
+POST http://localhost:2200/tweets/like
+Content-Type: application/json
+
+{
+  "tweetId": "1",
+  "userId": "4"
+}
+
+
+###

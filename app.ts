@@ -3,10 +3,12 @@ import "reflect-metadata";
 import {User} from "./Models/User";
 import AppDataSource from "./database/db";
 import {Tweet} from "./Models/Tweet";
+import {Like} from "./Models/Like";
 
 export const Manager = AppDataSource.manager
 export const UserRepository = AppDataSource.getRepository(User)
 export const TweetRepository = AppDataSource.getRepository(Tweet)
+export const LikeRepository = AppDataSource.getRepository(Like)
 
 
 const app = express()
@@ -18,7 +20,7 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 app.get("/users", async (req: Request, res: Response) => {
-    const users = await UserRepository.find( {where: {}})
+    const users = await UserRepository.find({where: {}})
     res.send(users)
 })
 
@@ -32,10 +34,8 @@ app.post("/users", async (req: Request, res: Response) => {
     res.send(result)
 })
 
-
-
 app.get("/tweets", async (req: Request, res: Response) => {
-    const data = await TweetRepository.find( {
+    const data = await TweetRepository.find({
         relations: {
             author: true,
         }
@@ -43,14 +43,29 @@ app.get("/tweets", async (req: Request, res: Response) => {
     res.send(data)
 })
 
-app.post("/tweets", async (req: Request, res: Response) => {
-    const {title, content, cover, authorId} = req.body;
-    let newTweet = new Tweet()
-    newTweet.authorId = authorId
-    newTweet.content = content
-    newTweet.cover = cover
-    newTweet.title = title
-    const result = await TweetRepository.save(newTweet)
+app.get("/tweets/:tweetId", async (req: Request, res: Response) => {
+    const data = await TweetRepository.findOne({
+        relations: {
+            author: true,
+            likes: {
+                user: true
+            }
+        },
+        where: {
+            id: Number(req.params.tweetId)
+        }
+    })
+    res.send(data)
+})
+
+app.post("/tweets/like", async (req: Request, res: Response) => {
+    const {tweetId, userId} = req.body;
+
+    let newLike = new Like()
+    newLike.tweetId = tweetId
+    newLike.userId = userId
+
+    const result = await LikeRepository.save(newLike)
     res.send(result)
 })
 

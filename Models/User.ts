@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, RelationOptions} from "typeorm"
+import {Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, RelationOptions} from "typeorm"
+import {Like} from "./Like";
 
 @Entity("users")
 export class User {
@@ -13,5 +14,9 @@ export class User {
 
     @Column({type: "varchar", nullable: false})
     lastName!: string
+
+    @OneToMany(() => Like, like => like.tweet)
+    likes: Like[] | undefined
+
 
 }
