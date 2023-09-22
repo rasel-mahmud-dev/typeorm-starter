@@ -30,7 +30,7 @@ app.get("/users", async (req: Request, res: Response) => {
 app.get("/users/roles/:userId", async (req: Request, res: Response) => {
     const userRoles = await UserRepository.find({
         relations: {
-            roles: {
+            userRoleMappings: {
                 role: true
             }
         },

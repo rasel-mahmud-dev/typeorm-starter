@@ -1,7 +1,17 @@
-import {Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, RelationOptions} from "typeorm"
+import {
+    Column,
+    Entity,
+    JoinTable,
+    ManyToMany,
+    OneToMany,
+    PrimaryColumn,
+    PrimaryGeneratedColumn,
+    RelationOptions
+} from "typeorm"
 import {Like} from "./Like";
 import {Comment} from "./Comment";
 import {UserRoleMapping} from "./UserRoleMapping";
+import {Role} from "./Role";
 
 @Entity("users")
 export class User {
@@ -23,9 +33,22 @@ export class User {
     @OneToMany(() => Comment, comment => comment.author)
     comments: Comment[] | undefined
 
-
     @OneToMany(() => UserRoleMapping, roleMapping => roleMapping.user)
-    roles: UserRoleMapping[] | undefined
+    userRoleMappings: UserRoleMapping[] | undefined
+
+    // @ManyToMany(() => Role, role => role.users)
+    // @JoinTable({
+    //     name: 'user_role_mapping',
+    //     joinColumn: {
+    //         name: 'userId',
+    //         referencedColumnName: 'id'
+    //     },
+    //     inverseJoinColumn: {
+    //         name: 'roleId',
+    //         referencedColumnName: 'id'
+    //     }
+    // })
+    // roles: Role[] | undefined;
 
 
 }
