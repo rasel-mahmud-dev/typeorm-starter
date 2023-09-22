@@ -1,5 +1,6 @@
 import {Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, RelationOptions} from "typeorm"
 import {Like} from "./Like";
+import {Comment} from "./Comment";
 
 @Entity("users")
 export class User {
@@ -17,6 +18,9 @@ export class User {
 
     @OneToMany(() => Like, like => like.tweet)
     likes: Like[] | undefined
+
+    @OneToMany(() => Comment, comment => comment.author)
+    comments: Comment[] | undefined
 
 
 }

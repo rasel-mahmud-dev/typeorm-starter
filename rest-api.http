@@ -43,4 +43,15 @@ Content-Type: application/json
 }
 
 
+### Create a tweet comment
+POST http://localhost:2200/tweets/comment
+Content-Type: application/json
+
+{
+  "content": "Super post",
+  "tweetId": "1",
+  "authorId": "4"
+}
+
+
 ###

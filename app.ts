@@ -1,14 +1,16 @@
-import express, {Response, Request} from "express"
+import express, {Response, Request, NextFunction} from "express"
 import "reflect-metadata";
 import {User} from "./Models/User";
 import AppDataSource from "./database/db";
 import {Tweet} from "./Models/Tweet";
 import {Like} from "./Models/Like";
+import {Comment} from "./Models/Comment";
 
 export const Manager = AppDataSource.manager
 export const UserRepository = AppDataSource.getRepository(User)
 export const TweetRepository = AppDataSource.getRepository(Tweet)
 export const LikeRepository = AppDataSource.getRepository(Like)
+export const CommentRepository = AppDataSource.getRepository(Comment)
 
 
 const app = express()
@@ -67,6 +69,22 @@ app.post("/tweets/like", async (req: Request, res: Response) => {
 
     const result = await LikeRepository.save(newLike)
     res.send(result)
+})
+
+app.post("/tweets/comment", async (req: Request, res: Response) => {
+    const {tweetId, authorId, content} = req.body;
+
+    let newComment = new Comment()
+    newComment.tweetId = tweetId
+    newComment.content = content
+    newComment.authorId = authorId
+
+    const result = await CommentRepository.save(newComment)
+    res.send(result)
+})
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    res.send(err.message)
 })
 
 
