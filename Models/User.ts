@@ -1,6 +1,7 @@
 import {Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, RelationOptions} from "typeorm"
 import {Like} from "./Like";
 import {Comment} from "./Comment";
+import {UserRoleMapping} from "./UserRoleMapping";
 
 @Entity("users")
 export class User {
@@ -21,6 +22,10 @@ export class User {
 
     @OneToMany(() => Comment, comment => comment.author)
     comments: Comment[] | undefined
+
+
+    @OneToMany(() => UserRoleMapping, roleMapping => roleMapping.user)
+    roles: UserRoleMapping[] | undefined
 
 
 }

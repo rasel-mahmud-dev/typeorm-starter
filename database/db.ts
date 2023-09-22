@@ -3,6 +3,8 @@ import {User} from "../Models/User";
 import {Tweet} from "../Models/Tweet";
 import {Like} from "../Models/Like";
 import {Comment} from "../Models/Comment";
+import {Role} from "../Models/Role";
+import {UserRoleMapping} from "../Models/UserRoleMapping";
 
 const AppDataSource = new DataSource({
     type: "postgres",
@@ -11,7 +13,7 @@ const AppDataSource = new DataSource({
     username: "postgres",
     password: "rasel",
     database: "type_orm",
-    entities: [User, Tweet, Like, Comment],
+    entities: [User, Tweet, Like, Comment, Role, UserRoleMapping],
     synchronize: true,
     logging: false,
 })

@@ -26,6 +26,22 @@ app.get("/users", async (req: Request, res: Response) => {
     res.send(users)
 })
 
+
+app.get("/users/roles/:userId", async (req: Request, res: Response) => {
+    const userRoles = await UserRepository.find({
+        relations: {
+            roles: {
+                role: true
+            }
+        },
+        where: {
+            id: Number(req.params.userId)
+        }
+    })
+    res.send(userRoles)
+})
+
+
 app.post("/users", async (req: Request, res: Response) => {
     const {firstName, lastName, email} = req.body;
     let newUser = new User()
@@ -51,10 +67,28 @@ app.get("/tweets/:tweetId", async (req: Request, res: Response) => {
             author: true,
             likes: {
                 user: true
+            },
+            comments: {
+                author: true
             }
         },
         where: {
             id: Number(req.params.tweetId)
+        },
+        select: {
+            likes: {
+                id: true,
+                createdAt: true,
+                user: {
+                    firstName: true
+                }
+            },
+            comments: {
+                content: true,
+                author: {
+                    firstName: true
+                }
+            }
         }
     })
     res.send(data)
