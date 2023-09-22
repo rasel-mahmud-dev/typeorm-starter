@@ -4,6 +4,9 @@ import {User} from "./Models/User";
 import AppDataSource from "./database/db";
 import {Tweet} from "./Models/Tweet";
 
+export const Manager = AppDataSource.manager
+export const UserRepository = AppDataSource.getRepository(User)
+export const TweetRepository = AppDataSource.getRepository(Tweet)
 
 
 const app = express()
@@ -15,7 +18,7 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 app.get("/users", async (req: Request, res: Response) => {
-    const users = await AppDataSource.manager.find(User, {where: {}})
+    const users = await UserRepository.find( {where: {}})
     res.send(users)
 })
 
@@ -25,14 +28,14 @@ app.post("/users", async (req: Request, res: Response) => {
     newUser.firstName = firstName
     newUser.lastName = lastName
     newUser.email = email
-    const result = await AppDataSource.manager.save(newUser)
+    const result = await UserRepository.save(newUser)
     res.send(result)
 })
 
 
 
 app.get("/tweets", async (req: Request, res: Response) => {
-    const data = await AppDataSource.manager.find(Tweet, {
+    const data = await TweetRepository.find( {
         relations: {
             author: true,
         }
@@ -47,7 +50,7 @@ app.post("/tweets", async (req: Request, res: Response) => {
     newTweet.content = content
     newTweet.cover = cover
     newTweet.title = title
-    const result = await AppDataSource.manager.save(newTweet)
+    const result = await TweetRepository.save(newTweet)
     res.send(result)
 })
 
