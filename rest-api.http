@@ -44,6 +44,11 @@ GET http://localhost:2200/tweets/1
 Content-Type: application/json
 
 
+### GET a tweet detail
+GET http://localhost:2200/tweets/detail/1
+Content-Type: application/json
+
+
 ### Create a tweet like
 POST http://localhost:2200/tweets/like
 Content-Type: application/json

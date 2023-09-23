@@ -77,4 +77,23 @@ router.post("/tweets/comment", async (req: Request, res: Response) => {
     res.send(result)
 })
 
+router.get("/tweets/detail/:id", async (req: Request, res: Response) => {
+    const tweets = await AppDataSource.getRepository(Tweet)
+        .createQueryBuilder("tweet") // first argument is an alias. Alias is what you are selecting - tweet. You must specify it.
+        .innerJoinAndSelect("tweet.author", "author")
+        .leftJoinAndSelect("tweet.comments", "comment")
+        // .where("tweet.isPublished = true")
+        .andWhere("(tweet.id = :tweetId OR tweet.title = :tweeTitle)")
+        .orderBy("tweet.id", "DESC")
+        .skip(0)
+        .take(10)
+        .setParameters({ tweetId: 9, tweeTitle: "Rust New Things" })
+        .getMany()
+
+
+    res.send(tweets)
+})
+
+
+
 export default router
