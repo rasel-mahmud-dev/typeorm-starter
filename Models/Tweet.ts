@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm"
+import {Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm"
 import {User} from "./User";
 import {Like} from "./Like";
 import {Comment} from "./Comment";
@@ -20,7 +20,7 @@ export class Tweet {
     @Column({ type: 'int', nullable: false }) // Assuming authorId is an integer
     authorId!: number;
 
-    @ManyToOne(() => User) // Many-to-One relationship with User
+    @ManyToOne(() => User, user=>user.tweets ) // Many-to-One relationship with User
     author!: User;
 
     @OneToMany(() => Like, like => like.tweet)

@@ -11,6 +11,18 @@ router.get("/users", async (req: Request, res: Response) => {
     res.send(users)
 })
 
+router.get("/users/:userId/tweets", async (req: Request, res: Response) => {
+    const users = await UserRepository.findOne({
+        relations: {
+            tweets: true
+        },
+        where: {
+            id: Number(req.params.userId)
+        }
+    })
+    res.send(users)
+})
+
 router.get("/users/roles/:userId", async (req: Request, res: Response) => {
     const userRoles = await UserRepository.find({
         relations: {

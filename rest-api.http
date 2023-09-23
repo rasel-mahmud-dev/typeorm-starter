@@ -2,6 +2,13 @@
 GET http://localhost:2200/users
 Content-Type: application/json
 
+
+### GET All tweets by user
+GET http://localhost:2200/users/1/tweets
+Content-Type: application/json
+
+
+
 ### GET a user roles
 GET http://localhost:2200/users/roles/1
 Content-Type: application/json

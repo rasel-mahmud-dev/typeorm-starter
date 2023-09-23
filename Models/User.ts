@@ -1,8 +1,8 @@
 import {
     Column,
-    Entity,
+    Entity, JoinColumn,
     JoinTable,
-    ManyToMany,
+    ManyToMany, ManyToOne,
     OneToMany,
     PrimaryColumn,
     PrimaryGeneratedColumn,
@@ -12,6 +12,8 @@ import {Like} from "./Like";
 import {Comment} from "./Comment";
 import {UserRoleMapping} from "./UserRoleMapping";
 import {Role} from "./Role";
+import {Product} from "./Product";
+import {Tweet} from "./Tweet";
 
 @Entity("users")
 export class User {
@@ -50,5 +52,15 @@ export class User {
     // })
     // roles: Role[] | undefined;
 
+    // @OneToMany(()=>Tweet, (tweet)=>tweet)
+    // @JoinColumn() // This specifies the foreign key column name in the database
+    // tweets: Tweet[] | undefined
 
+
+    // @ManyToOne(()=>Product, (products)=>products)
+    // products: Product[] | undefined
+
+
+    @OneToMany(() => Tweet, (tweet) => tweet.author)
+    tweets: Tweet[] | undefined
 }
