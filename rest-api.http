@@ -90,5 +90,30 @@ Content-Type: application/json
 
 
 
+### Get all Categories
+GET http://localhost:2200/categories
+Content-Type: application/json
+
+### Get all Categories with nested
+GET http://localhost:2200/categories/nested
+Content-Type: application/json
+
+### Get all Categories with all parent
+GET http://localhost:2200/categories/parent
+Content-Type: application/json
+
+
+### Create a Product
+POST http://localhost:2200/categories
+Content-Type: application/json
+
+{
+  "name": "Earphone",
+  "slug": "Earphone",
+  "parentId": 13
+}
+
+
+
 
 ###
