@@ -65,4 +65,30 @@ Content-Type: application/json
 }
 
 
+
+
+### Find a Products
+GET http://localhost:2200/products
+Content-Type: application/json
+
+
+### Find user Products
+GET http://localhost:2200/products/users/4
+Content-Type: application/json
+
+
+### Create a Product
+POST http://localhost:2200/products
+Content-Type: application/json
+
+{
+  "title": "Macbook pro m2",
+  "price": 3000.99,
+  "authorId": "4"
+}
+
+
+
+
+
 ###

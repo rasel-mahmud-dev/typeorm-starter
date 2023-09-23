@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "./User";
 
 
@@ -22,7 +22,6 @@ export class Product {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt!: Date;
 
-
-    // @ManyToOne(() => User, (user) => user.products)
-    // author!: User
+    @ManyToOne(() => User, (user) => user.products)
+    author!: User
 }

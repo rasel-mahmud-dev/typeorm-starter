@@ -57,10 +57,10 @@ export class User {
     // tweets: Tweet[] | undefined
 
 
-    // @ManyToOne(()=>Product, (products)=>products)
-    // products: Product[] | undefined
-
-
     @OneToMany(() => Tweet, (tweet) => tweet.author)
     tweets: Tweet[] | undefined
+
+    @OneToMany(()=>Product, (product)=>product.author)
+    products: Product[] | undefined
+
 }
